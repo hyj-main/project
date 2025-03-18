@@ -4,21 +4,30 @@
 ## calculate min_pts
 ## calculate ops
 ## visulaize with PCA
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+from sklearn.neighbors import NearestNeighbors
+from sklearn.cluster import DBSCAN
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.pipeline import make_pipeline
+
 
 def outlier_detection():
     # load data
     path = 
-    raw_df = 
-    
+    raw_df = pd.read_feather()
+    pcr_data = pd.read_feather('/../pcr_data.feather')
+
     # standardize before outlier detection
     scaler = StandardScaler()
-    scaler.fit(raw_df)
-    df_scaled = scaler.transform(raw_df)
+    scaler.fit(pcr_data)
+    df_scaled = scaler.transform(pcr_data)
     
     # Outlier detection with DBscan start
     # calculate minimum points
     min_pts = raw_df.shape[1]*2
-    
     
     neighbors = NearestNeighbors(n_neighbors = min_pts, metric = 'euclidean')
     neighbors_fit = neighbors.fit(df_scaled)
